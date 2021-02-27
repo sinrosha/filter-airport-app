@@ -1,5 +1,12 @@
-function AirportList({displayData}) {
-
+function AirportList({displayData, currentPage}) {
+    const startWindow = currentPage * 4 - 4;
+    const endWindow = currentPage * 4; 
+    // console.log("before", displayData);
+    // displayData = displayData.splice(startWindow, endWindow);
+    // console.log("after", displayData);
+    // console.log(startWindow, endWindow);
+    // const x = displayData.slice(startWindow, endWindow);
+    // console.log(x);
     return  displayData.length > 0 ? ( <div className="airportList">
         <table>
           <thead>
@@ -14,7 +21,8 @@ function AirportList({displayData}) {
             </tr>
           </thead>
           {
-             displayData.map(airport => (
+             displayData.slice(startWindow, endWindow).map(airport => (
+              // x.map(airport => (
               <tbody key={airport.id}>
                 <tr>
                   <td>{airport.name}</td>
