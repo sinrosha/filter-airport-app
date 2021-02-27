@@ -1,0 +1,153 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;900&display=swap');
+
+body {
+    background-color: #f4f4f4;
+}
+
+.App {
+    min-height: calc(100vh - 30px);
+    padding: 40px;
+    background: #fff;
+    margin: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+h1 {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 800;
+    font-size: 3.6rem;
+    letter-spacing: 1px
+}
+
+h1 span {
+    color: #e0e0e0;
+}
+
+.header svg {
+    font-size: 2rem;
+}
+
+.filter  {
+    display: flex;
+    justify-content: space-between;
+    padding: 70px 0 30px;
+    align-items: center;
+}
+
+.filter ul {
+    display: flex;
+}
+
+.filter h2 {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 800;
+    font-size: 1.4rem;
+    letter-spacing: 1px;
+    padding-bottom: 20px;
+}
+
+.filter li {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1rem;
+    margin-left: 3vw;
+    font-weight: 400;
+}
+
+.filter li:first-child {
+    margin-left: 0;
+}
+
+.filter label {
+    display: flex;
+    align-items: center;
+}
+
+.filterByType input {
+    margin-right: 7px;
+    opacity: 0;
+}
+
+.filterByType label {
+    position: relative;
+}
+
+.filterByType .checkIcon {
+    position: absolute;
+    left: 0;
+    display: flex;
+}
+
+.filterByType .checkIcon svg {
+    font-size: 1.2rem;
+}
+
+.filterByType {
+    width: 65%;
+}
+
+.filterBySearch {
+    width: 35%;
+}
+
+.searchBox input {
+    border: 0;
+    border-bottom: 2px solid #000;
+    width: 100%;
+    font-size: 18px;
+    color: #333;
+    font-family: 'Roboto', sans-serif;
+}
+
+.searchBox input:focus {
+    outline: 0;
+}
+
+table {
+    width: 100%;
+}
+
+
+table td,
+table th {
+    text-align: left;
+    padding: 20px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1rem;
+}
+
+table th {
+    font-weight: 600;
+    background: #e7e7e7;
+}
+
+.greyBg td {
+    background: #f4f4f4;
+}
+
+.count span {
+    font-weight: 600;
+}
+
+.count p {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1rem;
+}
+
+.pagination {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 70px;
+}
+
+.pagination svg {
+    font-size: 1.4rem;
+}
