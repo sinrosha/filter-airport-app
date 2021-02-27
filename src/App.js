@@ -12,7 +12,9 @@ class App extends React.Component {
     rawData: [],
     displayData: [],
     activeFilters: [],
-    searchTerm: ""
+    searchTerm: "",
+    currentPage: 1,
+    listWindow: 4
   }
 
 
@@ -23,28 +25,23 @@ class App extends React.Component {
   }
 
   handleChange = (e) => {
-
     const {type, name, value, checked} =  e.target;
-    console.log(type, name, value, checked);
     const { rawData, activeFilters, searchTerm} = this.state;
 
     const searchInput = type === "text"  ? value : searchTerm;
     const checkboxFilters = type === "checkbox" ? checked ?  activeFilters.concat(name) :  activeFilters.filter(filter => filter !== name) : activeFilters;
-    
-    
-    const typeFilteredData = checkboxFilters.length ? rawData.filter( data => checkboxFilters.includes(data.type) ) : rawData;
-    console.log("seachInput", searchInput, searchTerm);
+    const typeFilteredData = checkboxFilters.length ? rawData.filter(data => checkboxFilters.includes(data.type) ) : rawData;
 
     const searchFilteredData = searchInput.length ? typeFilteredData.filter(data => (
-      data.name.toLowerCase().includes(value.toLowerCase()) ||
-      data.icao.toLowerCase().includes(value.toLowerCase()) ||
-      (data.iata && data.iata.toLowerCase().includes(value.toLowerCase())) ||
-      (data.city && data.city.toLowerCase().includes(value.toLowerCase())) ||
-      String(data.latitude).includes(value.toLowerCase()) ||
-      String(data.longitude).includes(value.toLowerCase()) ||
-      data.country.toLowerCase().includes(value.toLowerCase())
+      data.name.toLowerCase().includes(searchInput.toLowerCase()) ||
+      data.icao.toLowerCase().includes(searchInput.toLowerCase()) ||
+      (data.iata && data.iata.toLowerCase().includes(searchInput.toLowerCase())) ||
+      (data.city && data.city.toLowerCase().includes(searchInput.toLowerCase())) ||
+      String(data.latitude).includes(searchInput.toLowerCase()) ||
+      String(data.longitude).includes(searchInput.toLowerCase()) ||
+      data.country.toLowerCase().includes(searchInput.toLowerCase())
     )) : typeFilteredData;
-
+  
     this.setState({
       activeFilters: checkboxFilters,
       displayData: searchFilteredData,
@@ -52,15 +49,13 @@ class App extends React.Component {
     })
   }
 
-
-
   render() {
     return (
       <div className="App">
         <Header />
         <Filter onChange={this.handleChange} />
         <AirportList displayData={this.state.displayData} />
-        <Pagination />
+        <Pagination displayData={this.state.displayData} />
       </div>
     );
   }

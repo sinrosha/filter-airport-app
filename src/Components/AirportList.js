@@ -1,7 +1,6 @@
 function AirportList({displayData}) {
 
-    return (
-      <div className="airportList">
+    return  displayData.length > 0 ? ( <div className="airportList">
         <table>
           <thead>
             <tr>
@@ -31,8 +30,7 @@ function AirportList({displayData}) {
           }
         </table>
         
-      </div>
-    );
+        </div>) : ( <p>No airports as per your filter</p> );
 }
   
 export default AirportList;
