@@ -14,6 +14,10 @@ body {
     justify-content: center;
 }
 
+tbody tr:nth-child(odd){
+    background-color: #f4f4f4;
+  }
+
 .pagination .prev,
 .pagination .next {
     cursor: pointer;
@@ -43,7 +47,7 @@ h1 span {
 .filter  {
     display: flex;
     justify-content: space-between;
-    padding: 70px 0 30px;
+    padding: 60px 0 30px;
     align-items: center;
 }
 
@@ -118,7 +122,6 @@ h1 span {
 
 table {
     width: 100%;
-    table-layout: fixed;
 }
 
 .airportList {
@@ -158,7 +161,7 @@ table th {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-top: 70px;
+    padding-top: 60px;
 }
 
 .pagination svg {
@@ -213,34 +216,42 @@ table th {
 
 @media screen and (max-width: 480px) {
     h1 {
-        font-size: 2rem;
+        font-size: 1.8rem;
+    }
+
+    .header svg {
+        font-size: 1.5rem;
     }
 
     table td, table th {
         font-size: 0.9rem;
-        width: 150px;
+        width: 200px;
+        padding: 18px;
     }
 
     .filterByType {
         width: 100%;
-        margin-bottom: 30px;
+        margin-bottom: 20px;
+    }
+
+    .filterBySearch {
+        display: flex;
+        width: 100%;
+        align-items: center;
     }
 
     .filter h2 {
         padding-bottom: 15px;
-    }
-
-    .filter h2 {
         line-height: 1.4;
-        font-size: 1.1rem;
+        font-size: 1rem;
     }
 
     .App {
-        padding: 25px
+        padding: 20px
     }
 
     .filter {
-        padding: 40px 0;
+        padding: 30px 0;
     }
 
     .filter ul {
@@ -259,10 +270,23 @@ table th {
     }
 
     .count p {
-        font-size: 0.9rem;
+        font-size: 1rem;
     }
 
     .pagination svg {
         font-size: 1.1rem;
+    }
+
+    .pagination {
+        padding-top: 10px;
+    }
+
+    .filterBySearch h2 {
+        padding-bottom: 0;
+        width: 60%;
+    }
+
+    .searchBox input {
+        font-size: 1rem;
     }
 }

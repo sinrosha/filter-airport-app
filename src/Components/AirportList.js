@@ -18,11 +18,10 @@ function AirportList({displayData, currentPage, handleClick}) {
               <th>Type</th>
             </tr>
           </thead>
+          <tbody>
           {
              displayData.slice(startWindow, endWindow).map(airport => (
-              // x.map(airport => (
-              <tbody key={airport.id}>
-                <tr>
+                <tr key={airport.id}> 
                   <td>{airport.name}</td>
                   <td>{airport.icao}</td>
                   <td>{airport.iata}</td>
@@ -31,9 +30,9 @@ function AirportList({displayData, currentPage, handleClick}) {
                   <td>{airport.longitude}</td>
                   <td>{airport.type}</td>
                 </tr>
-              </tbody>
             ))
           }
+          </tbody>
         </table>
         
         </div>) : ( <p className="noResults">No airports as per your filter</p> );
