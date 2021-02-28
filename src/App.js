@@ -1,13 +1,10 @@
 import React from "react"
-import "./assets/css/reset.css"
-import "./assets/css/main.css"
 import Header from "./Components/Header"
 import Filter from "./Components/Filter"
 import AirportList from "./Components/AirportList"
 import Pagination from "./Components/Pagination"
-
 class App extends React.Component {
-
+  
   state = {
     rawData: [],
     displayData: [],
@@ -20,14 +17,10 @@ class App extends React.Component {
     caches.keys().then(keys => {
       if(keys.includes("airportdata")) {
         caches.open('airportdata').then(cache => {
-          cache.match('data/airports.json').then(res => {
-            return res.json()
-          }).then(res => {
+          cache.match('data/airports.json').then(res => res.json())
+          .then(res => {
             if(res.length > 0) {
-              this.setState({
-                rawData: res,
-                displayData: res,
-              }, () => {
+              this.setState({ rawData: res, displayData: res,}, () => {
                 this.setState({
                   activeFilters:  JSON.parse(window.localStorage.getItem("checkboxFilters")) || [],
                   searchTerm: window.localStorage.getItem("searchInput") || "",
@@ -40,10 +33,7 @@ class App extends React.Component {
       } else {
           fetch("data/airports.json")
           .then( resp => resp.json())
-          .then( resp => this.setState({
-              rawData: resp, 
-              displayData: resp
-            }, () => {
+          .then( resp => this.setState({ rawData: resp, displayData: resp }, () => {
               this.setState({
                 activeFilters:  JSON.parse(window.localStorage.getItem("checkboxFilters")) || [],
                 searchTerm: window.localStorage.getItem("searchInput") || "",
@@ -65,11 +55,7 @@ class App extends React.Component {
 
   handleChange = (e) => {
     const {type, name, value, checked} =  e.target;
-    console.log(type, name, value, checked);
     const { rawData, activeFilters, searchTerm} = this.state;
-
-    this.setState({currentPage: 1});
-
     const searchInput = type === "text"  ? value : searchTerm;
     const checkboxFilters = type === "checkbox" ? checked ?  activeFilters.concat(name) :  activeFilters.filter(filter => filter !== name) : activeFilters;
     const typeFilteredData = checkboxFilters.length ? rawData.filter(data => checkboxFilters.includes(data.type) ) : rawData;
@@ -87,7 +73,8 @@ class App extends React.Component {
     this.setState({
       activeFilters: checkboxFilters,
       displayData: searchFilteredData,
-      searchTerm: searchInput
+      searchTerm: searchInput,
+      currentPage: 1
     }, () => {
       window.localStorage.setItem("checkboxFilters", JSON.stringify(checkboxFilters));
       window.localStorage.setItem("searchInput", searchInput);
@@ -103,14 +90,15 @@ class App extends React.Component {
       this.setState({ currentPage: this.state.currentPage + 1 });
     }
   }
-
+  
   render() {
+    const {rawData, searchTerm, activeFilters, currentPage, displayData} = this.state;
     return (
       <div className="App">
         <Header />
-        <Filter onChange={this.handleChange} searchTerm={this.state.searchTerm} activeFilters={this.state.activeFilters} />
-        <AirportList displayData={this.state.displayData} currentPage={this.state.currentPage} handleClick={this.handleClick}/>
-        <Pagination displayData={this.state.displayData} handleClick={this.handleNavigation} currentPage={this.state.currentPage} />
+        <Filter searchTerm={searchTerm} activeFilters={activeFilters} onChange={this.handleChange} />
+        {rawData.length > 0 ? <AirportList displayData={displayData} currentPage={currentPage} /> : <p className="loading">Loading...</p>} 
+        <Pagination displayData={displayData} currentPage={currentPage} handleClick={this.handleNavigation} />
       </div>
     );
   }

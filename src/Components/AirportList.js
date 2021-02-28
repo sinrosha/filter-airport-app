@@ -1,6 +1,4 @@
-import React from 'react'
-
-function AirportList({displayData, currentPage, handleClick}) {
+function AirportList({displayData, currentPage}) {
 
     const startWindow = currentPage * 4 - 4;
     const endWindow = currentPage * 4; 

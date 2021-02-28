@@ -173,7 +173,8 @@ table th {
     padding-left: 10px;
 }
 
-.noResults {
+.noResults,
+.loading {
     font-family: 'Roboto', sans-serif;
     font-size: 2rem;
     margin: 2rem 0;
@@ -219,6 +220,17 @@ table th {
         font-size: 1.8rem;
     }
 
+    .noResults,
+    .loading {
+        font-family: 'Roboto', sans-serif;
+        font-size: 1.6rem;
+        margin: 1.6rem 0;
+    }
+
+    table {
+        table-layout:fixed;
+    }
+
     .header svg {
         font-size: 1.5rem;
     }
@@ -227,6 +239,9 @@ table th {
         font-size: 0.9rem;
         width: 200px;
         padding: 18px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 
     .filterByType {
