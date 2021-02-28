@@ -77,6 +77,7 @@ h1 span {
 
 .filterByType label {
     position: relative;
+    cursor: pointer;
 }
 
 .filterByType .checkIcon {

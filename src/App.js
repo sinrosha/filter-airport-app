@@ -18,18 +18,52 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    fetch("data/airports.json")
-    .then( resp => resp.json())
-    .then( resp => this.setState({
-        rawData: resp, 
-        displayData: resp
-      }, () => {
-        this.setState({
-          activeFilters:  JSON.parse(window.localStorage.getItem("checkboxFilters")) || [],
-          searchTerm: window.localStorage.getItem("searchInput") || "",
-          displayData: JSON.parse(window.localStorage.getItem("displayData")) || resp
+    caches.keys().then(keys => {
+      if(keys.includes("airportdata")) {
+        console.log("from cache");
+        caches.open('airportdata').then(cache => {
+          cache.match('data/airports.json').then(res => {
+            return res.json()
+          }).then(res => {
+            if(res.length > 0) {
+              this.setState({
+                rawData: res,
+                displayData: res,
+              }, () => {
+                this.setState({
+                  activeFilters:  JSON.parse(window.localStorage.getItem("checkboxFilters")) || [],
+                  searchTerm: window.localStorage.getItem("searchInput") || "",
+                  displayData: JSON.parse(window.localStorage.getItem("displayData")) || res
+                })
+              })
+            }
+          })
         })
-      }))
+      } else {
+          console.log("from network");
+          fetch("data/airports.json")
+          .then( resp => resp.json())
+          .then( resp => this.setState({
+              rawData: resp, 
+              displayData: resp
+            }, () => {
+              this.setState({
+                activeFilters:  JSON.parse(window.localStorage.getItem("checkboxFilters")) || [],
+                searchTerm: window.localStorage.getItem("searchInput") || "",
+                displayData: JSON.parse(window.localStorage.getItem("displayData")) || resp
+              })
+          }))
+          this.setCache();
+      }
+    })
+  }
+
+  setCache = () => {
+    if ('caches' in window) {
+      caches.open('airportdata').then(cache => {
+        cache.add("data/airports.json")
+      })
+    }
   }
 
   handleChange = (e) => {
@@ -59,7 +93,7 @@ class App extends React.Component {
     }, () => {
       window.localStorage.setItem("checkboxFilters", JSON.stringify(checkboxFilters));
       window.localStorage.setItem("searchInput", searchInput);
-      window.localStorage.setItem("displayData", JSON.stringify(displayData));
+      window.localStorage.setItem("displayData", JSON.stringify(searchFilteredData));
     })
   }
 
