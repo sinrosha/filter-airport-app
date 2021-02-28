@@ -113,6 +113,11 @@ h1 span {
 
 table {
     width: 100%;
+    table-layout: fixed;
+}
+
+.airportList {
+    overflow: scroll;
 }
 
 
@@ -122,6 +127,8 @@ table th {
     padding: 20px;
     font-family: 'Roboto', sans-serif;
     font-size: 1rem;
+    line-height: 1.4;
+    width: calc(100%/6);
 }
 
 table th {
@@ -151,4 +158,106 @@ table th {
 
 .pagination svg {
     font-size: 1.4rem;
+}
+
+.favourite {
+    vertical-align: middle;
+    padding-left: 10px;
+}
+
+.noResults {
+    font-family: 'Roboto', sans-serif;
+    font-size: 2rem;
+    margin: 2rem 0;
+}
+
+@media screen and (max-width: 1024px) {
+    table td, table th {
+        width: 200px;
+    }
+
+    .filter li {
+        margin-left: 2vw;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    h1 {
+        font-size: 2.6rem;
+    }
+
+    .filter {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .filterByType {
+        width: 100%;
+        margin-bottom: 30px;
+    }
+
+    .filter h2 {
+        padding-bottom: 15px;
+    }
+
+    .filter {
+        padding: 50px 0;
+    }
+}
+
+
+@media screen and (max-width: 480px) {
+    h1 {
+        font-size: 2rem;
+    }
+
+    table td, table th {
+        font-size: 0.9rem;
+        width: 150px;
+    }
+
+    .filterByType {
+        width: 100%;
+        margin-bottom: 30px;
+    }
+
+    .filter h2 {
+        padding-bottom: 15px;
+    }
+
+    .filter h2 {
+        line-height: 1.4;
+        font-size: 1.1rem;
+    }
+
+    .App {
+        padding: 25px
+    }
+
+    .filter {
+        padding: 40px 0;
+    }
+
+    .filter ul {
+        width: 100%;
+        flex-wrap: wrap;
+    }
+
+    .filter li {
+        margin: 0;
+        width: 50%;
+        margin-bottom: 10px;
+    }
+
+    .filter li:last-child {
+        margin-bottom: 0;
+    }
+
+    .count p {
+        font-size: 0.9rem;
+    }
+
+    .pagination svg {
+        font-size: 1.1rem;
+    }
 }

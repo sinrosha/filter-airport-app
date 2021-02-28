@@ -53,15 +53,6 @@ class FilterByType extends React.Component {
                   Closed
                 </label>
               </li>
-              <li>
-              <label>
-                    <div className="checkIcon">
-                        { this.props.activeFilters.includes("favourites") ? <IoCheckboxSharp/> : <IoCheckboxOutline/> }    
-                    </div>
-                  <input type="checkbox" name="favourites" checked={this.props.activeFilters.includes("favourites")} onChange={this.props.onChange}/>
-                  In your favourites
-                </label>
-              </li>
             </ul>
         </div>
         )

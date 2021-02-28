@@ -1,12 +1,11 @@
-function AirportList({displayData, currentPage}) {
+import React from 'react'
+import {MdFavoriteBorder, MdFavorite} from "react-icons/md"
+
+function AirportList({displayData, currentPage, handleClick}) {
+
     const startWindow = currentPage * 4 - 4;
     const endWindow = currentPage * 4; 
-    // console.log("before", displayData);
-    // displayData = displayData.splice(startWindow, endWindow);
-    // console.log("after", displayData);
-    // console.log(startWindow, endWindow);
-    // const x = displayData.slice(startWindow, endWindow);
-    // console.log(x);
+   
     return  displayData.length > 0 ? ( <div className="airportList">
         <table>
           <thead>
@@ -38,7 +37,7 @@ function AirportList({displayData, currentPage}) {
           }
         </table>
         
-        </div>) : ( <p>No airports as per your filter</p> );
+        </div>) : ( <p className="noResults">No airports as per your filter</p> );
 }
   
 export default AirportList;
