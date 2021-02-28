@@ -17,16 +17,26 @@ class App extends React.Component {
     listWindow: 4
   }
 
-
   componentDidMount() {
     fetch("data/airports.json")
     .then( resp => resp.json())
-    .then( resp => this.setState({rawData: resp, displayData: resp}))
+    .then( resp => this.setState({
+        rawData: resp, 
+        displayData: resp
+      }, () => {
+        this.setState({
+          activeFilters:  JSON.parse(window.localStorage.getItem("checkboxFilters")) || [],
+          searchTerm: window.localStorage.getItem("searchInput") || "",
+          displayData: JSON.parse(window.localStorage.getItem("displayData")) || resp
+        })
+      }))
   }
 
   handleChange = (e) => {
     const {type, name, value, checked} =  e.target;
-    const { rawData, activeFilters, searchTerm} = this.state;
+    const { rawData, displayData, activeFilters, searchTerm} = this.state;
+
+    this.setState({currentPage: 1});
 
     const searchInput = type === "text"  ? value : searchTerm;
     const checkboxFilters = type === "checkbox" ? checked ?  activeFilters.concat(name) :  activeFilters.filter(filter => filter !== name) : activeFilters;
@@ -46,6 +56,10 @@ class App extends React.Component {
       activeFilters: checkboxFilters,
       displayData: searchFilteredData,
       searchTerm: searchInput
+    }, () => {
+      window.localStorage.setItem("checkboxFilters", JSON.stringify(checkboxFilters));
+      window.localStorage.setItem("searchInput", searchInput);
+      window.localStorage.setItem("displayData", JSON.stringify(displayData));
     })
   }
 
@@ -62,7 +76,7 @@ class App extends React.Component {
     return (
       <div className="App">
         <Header />
-        <Filter onChange={this.handleChange} />
+        <Filter onChange={this.handleChange} searchTerm={this.state.searchTerm} activeFilters={this.state.activeFilters} />
         <AirportList displayData={this.state.displayData} currentPage={this.state.currentPage} />
         <Pagination displayData={this.state.displayData} handleClick={this.handleNavigation} currentPage={this.state.currentPage} />
       </div>

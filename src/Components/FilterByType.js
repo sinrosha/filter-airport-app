@@ -3,23 +3,6 @@ import  {IoCheckboxOutline, IoCheckboxSharp} from "react-icons/io5"
 
 class FilterByType extends React.Component {
 
-    state = {
-        small: false,
-        medium: false,
-        large: false,
-        heliport: false,
-        closed: false,
-        favourites: false
-    }
-
-    handleChange = (e) => {
-        const {checked, name} = e.target;
-        this.setState({
-            [name]: checked
-        });
-        this.props.onChange(e);
-    }
-
     render() {
         return (
         <div className="filterByType">
@@ -28,54 +11,54 @@ class FilterByType extends React.Component {
               <li>
                 <label>
                   <div className="checkIcon">
-                      { this.state.small ? <IoCheckboxSharp/> : <IoCheckboxOutline/> }    
+                      { this.props.activeFilters.includes("small") ? <IoCheckboxSharp/> : <IoCheckboxOutline/> }    
                   </div>
-                  <input type="checkbox" name="small" checked={this.state.small} onChange={this.handleChange}/>
+                  <input type="checkbox" name="small" checked={this.props.activeFilters.includes("small")} onChange={this.props.onChange}/>
                   Small
                 </label>
               </li>
               <li>
                 <label>
                     <div className="checkIcon">
-                        { this.state.medium ? <IoCheckboxSharp/> : <IoCheckboxOutline/> }    
+                        { this.props.activeFilters.includes("medium") ? <IoCheckboxSharp/> : <IoCheckboxOutline/> }    
                     </div>
-                    <input type="checkbox" name="medium" checked={this.state.medium} onChange={this.handleChange}/>
+                    <input type="checkbox" name="medium" checked={this.props.activeFilters.includes("medium")} onChange={this.props.onChange}/>
                     Medium
                 </label>
               </li>
               <li>
                 <label>
                     <div className="checkIcon">
-                        { this.state.large ? <IoCheckboxSharp/> : <IoCheckboxOutline/> }    
+                        { this.props.activeFilters.includes("large") ? <IoCheckboxSharp/> : <IoCheckboxOutline/> }    
                     </div>
-                    <input type="checkbox" name="large" checked={this.state.large} onChange={this.handleChange} />
+                    <input type="checkbox" name="large" checked={this.props.activeFilters.includes("large")} onChange={this.props.onChange} />
                     Large
                 </label>
               </li>
               <li>
               <label>
                     <div className="checkIcon">
-                        { this.state.heliport ? <IoCheckboxSharp/> : <IoCheckboxOutline/> }    
+                        { this.props.activeFilters.includes("heliport") ? <IoCheckboxSharp/> : <IoCheckboxOutline/> }    
                     </div>
-                  <input type="checkbox" name="heliport"  checked={this.state.heliport} onChange={this.handleChange}/>
+                  <input type="checkbox" name="heliport"  checked={this.props.activeFilters.includes("heliport")} onChange={this.props.onChange}/>
                   Heliport
                 </label>
               </li>
               <li>
               <label>
                     <div className="checkIcon">
-                        { this.state.closed ? <IoCheckboxSharp/> : <IoCheckboxOutline/> }    
+                        { this.props.activeFilters.includes("closed") ? <IoCheckboxSharp/> : <IoCheckboxOutline/> }    
                     </div>
-                  <input type="checkbox" name="closed" checked={this.state.closed} onChange={this.handleChange}/>
+                  <input type="checkbox" name="closed" checked={this.props.activeFilters.includes("closed")} onChange={this.props.onChange}/>
                   Closed
                 </label>
               </li>
               <li>
               <label>
                     <div className="checkIcon">
-                        { this.state.favourites ? <IoCheckboxSharp/> : <IoCheckboxOutline/> }    
+                        { this.props.activeFilters.includes("favourites") ? <IoCheckboxSharp/> : <IoCheckboxOutline/> }    
                     </div>
-                  <input type="checkbox" name="favourites" checked={this.state.favourites} onChange={this.handleChange}/>
+                  <input type="checkbox" name="favourites" checked={this.props.activeFilters.includes("favourites")} onChange={this.props.onChange}/>
                   In your favourites
                 </label>
               </li>
